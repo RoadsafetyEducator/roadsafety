@@ -1,0 +1,247 @@
+.main-frame{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.question{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.question-title{
+    font-family: 'Anek Malayalam', sans-serif;
+    /* font-family: 'Manrope'; */
+    font-size: 20px;
+    font-weight: 500;
+    color: #11052c;
+  }
+
+.sub-frame {
+  border: 1px solid #f1f1f1;
+  width: 30vw;    
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+  border-radius: 15px; 
+  padding: 30px;  
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  background: #fff;
+}
+
+
+.ques-next-btn{
+    float: right;
+}
+
+.answers-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.answers-container{
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    width: 100%;
+}
+
+.left-answers{
+  display: flex;
+  flex-direction: row;
+  column-gap: 50px;
+}
+
+.right-answers{
+    display: flex;
+    flex-direction: row;
+    column-gap: 50px;}
+  
+
+/* CSS */
+.answers {
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 16px;
+  color: #2d264b;
+  cursor: pointer;
+  display: inline-block;
+  font-family: 'Anek Malayalam', sans-serif;
+  font-size: 14px;
+  /* font-weight: 700; */
+  letter-spacing: .8px;
+  line-height: 20px;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 13px 16px;
+  /* text-align: center; */
+  /* text-transform: uppercase; */
+  /* touch-action: manipulation;
+  transform: translateZ(0);
+  transition: filter .2s; */
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: wrap;
+  width: 100%;
+}
+
+.answers:after {
+  background-clip: padding-box;
+  background: #ffffff;
+  border: 1px solid #eaeaea;
+  border-radius: 16px;
+  color: #2d264b;
+  bottom: -4px;
+  content: "";
+  left: 0;
+  position: absolute;
+  /* right: 0; */
+  top: 0;
+  z-index: -1;
+}
+
+.answers,
+.answers:focus {
+  user-select: auto;
+}
+
+.answers:hover:not(:disabled) {
+  filter: brightness(1.1);
+  -webkit-filter: brightness(1.1);
+}
+
+.answers:disabled {
+  cursor: auto;
+}
+
+.answers:active {
+  border-width: 4px 0 0;
+  background: none;
+
+}
+
+/**********************************/
+
+/* CSS */
+.ques-next-btn {
+  background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
+  border-radius: 9px;
+  outline: none;
+  border: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: block;
+  font-family: 'Manrope';
+  font-size: 15px;
+  line-height: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 11px 15px 12px;
+  text-align: center;
+  transition: box-shadow .05s ease-in-out,opacity .05s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  /* width: 100%; */
+}
+
+.ques-next-btn:hover {
+  box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, rgba(0, 0, 0, 0.4) 0 1px 2px;
+  text-decoration: none;
+  transition-duration: .15s, .15s;
+}
+
+.ques-next-btn:active {
+  box-shadow: rgba(0, 0, 0, 0.15) 0 2px 4px inset, rgba(0, 0, 0, 0.4) 0 1px 1px;
+}
+
+.ques-next-btn:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+.ques-next-btn:disabled:active {
+  pointer-events: none;
+}
+
+.ques-next-btn:disabled:hover {
+  box-shadow: none;
+}
+
+.question-num{
+  font-size: 24px;
+  font-weight: 600;
+  color: #800080;
+}
+
+.question-page-num{
+  font-size: 16px;
+  font-weight: 600;
+  color: #e0dee3;
+}
+
+.quiz-summary{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+.sad-img{
+  width:15vw;
+  height: 30vh;
+}
+
+/* Tablets */
+@media screen and (max-width: 1024px) {
+  .sub-frame {
+      width: 50vw;
+      padding: 25px;
+  }
+
+  .sad-img{
+    width:25vw;
+    height: 30vh;
+  }
+}
+
+/* Small tablets and large phones */
+@media screen and (max-width: 768px) {
+  .sub-frame {
+      width: 70vw;
+      padding: 20px;
+  }
+
+  .sad-img{
+    width:30vw;
+    height: 28vh;
+  }
+
+  .quiz-completed{
+    font-size: 20px;
+  }
+}
+
+/* Mobile devices */
+@media screen and (max-width: 480px) {
+  .sub-frame {
+      width: 80vw;  /* Full width on mobile */
+      padding: 15px;
+      row-gap: 30px;
+  }
+
+  .sad-img{
+    width:35vw;
+    height: 20vh;
+  }
+
+  .quiz-completed{
+    font-size: 18px;
+  }
+}

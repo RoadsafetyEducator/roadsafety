@@ -1,0 +1,37 @@
+.fireworks-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.firework {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 
+    0 0 10px #ff1461,
+    0 0 20px #ff1461,
+    0 0 40px #ff1461;
+  animation: firework 1.5s ease-in-out infinite;
+}
+
+@keyframes firework {
+  0% {
+    transform: translate(var(--x, 0), var(--y, 0)) scale(0);
+    opacity: 1;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(var(--x, 0) * 20), calc(var(--y, 0) * 20)) scale(3);
+    opacity: 0;
+  }
+}

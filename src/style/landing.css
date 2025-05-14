@@ -1,0 +1,102 @@
+body{
+    background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
+}
+
+/* Center the container in the middle of the screen */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+}
+
+/* Box styling */
+.box {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 90vw;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;  /* Ensures everything stacks vertically */
+    align-items: center;     /* Centers content inside */
+}
+
+/* Topic styling */
+.topic {
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    padding-bottom: 10px;
+    font-family: 'Manrope', sans-serif;
+}
+
+/* Half underline effect */
+.underline {
+    position: absolute;
+    left: 25%;
+    bottom: 0;
+    width: 50%;
+    height: 3px;
+    background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
+}
+
+/* Typing animation */
+.storyline {
+    margin-top: 20px;  /* Added spacing below the topic */
+    font-size: 18px;
+    color: #555;
+    font-family: 'Manrope', sans-serif;
+    white-space: normal;
+    overflow: hidden;
+    word-wrap: break-word;
+    text-align: center; /* Ensure it stays centered */
+    width: 100%;  /* Prevents it from collapsing */
+}
+
+/* Cursor animation */
+.cursor {
+    font-size: 18px;
+    font-weight: bold;
+    color: #007bff;
+    animation: blink 0.6s step-end infinite;
+}
+
+/* Blinking effect */
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .box {
+        width: 100vw;
+        padding: 15px;
+    }
+}
+
+.next-button{
+    background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
+     border: none;
+}
+
+.next-button:hover{
+    background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%) !important;
+
+}
+
+.accept-continue-btn{
+    background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
+    border: none;
+
+}
+
+.accept-continue-btn:hover{
+    background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%) !important;
+
+}
