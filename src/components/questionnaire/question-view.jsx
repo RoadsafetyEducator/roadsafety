@@ -163,7 +163,7 @@ const Quiz = () => {
     if (zone) {
 
     // Fetch questions from API
-      fetch(`http://localhost:8081/api/zone/${zone}`)
+      fetch(`/api/zone/${zone}`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Failed to fetch questions');
