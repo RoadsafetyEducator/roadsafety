@@ -168,6 +168,7 @@ const Quiz = () => {
           if (!response.ok) {
             throw new Error('Failed to fetch questions');
           }
+          console.log("URL: http://3.81.210.221:8081")
           return response.json();
         })
         .then(data => {
