@@ -36,3 +36,8 @@
     transform: rotate(360deg);
   }
 }
+
+.ant-message {
+  z-index: 1050 !important;
+  pointer-events: auto !important;
+}

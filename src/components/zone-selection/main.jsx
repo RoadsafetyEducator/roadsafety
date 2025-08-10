@@ -54,7 +54,7 @@ const Main = () => {
                   </Button>
                 ]}
               >
-                <Meta title={zone.title} description="www.instagram.com" />
+                <Meta title={zone.title} description="" />
               </Card>
             </Col>
           ))}

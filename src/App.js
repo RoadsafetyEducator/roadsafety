@@ -1,3 +1,4 @@
+import 'antd/dist/antd.css';
 import logo from './logo.svg';
 import './App.css';
 
