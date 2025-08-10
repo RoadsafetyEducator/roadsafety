@@ -79,9 +79,8 @@ const SignIn = () => {
     localStorage.setItem('studentName', formData.studentName);
     localStorage.setItem('school', formData.school);
 
-    message.success('Sign in successful!');
-
     setTimeout(() => {
+      message.success('Sign in successful!');
       navigate('/avatar');
       setLoading(false); // optionally reset loading after navigation
     }, 3000);
