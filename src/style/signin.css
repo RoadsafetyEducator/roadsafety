@@ -117,8 +117,8 @@
   color: white;
   border: none;
   padding: 20px 24px !important; /* adjust padding */
-  border-radius: 8px;
-  font-size: 16px;
+  border-radius: 20px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
