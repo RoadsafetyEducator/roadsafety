@@ -79,6 +79,13 @@ const SignIn = () => {
     localStorage.setItem('studentName', formData.studentName);
     localStorage.setItem('school', formData.school);
 
+    await fetch('http://localhost:8081/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
+
+
     setTimeout(() => {
       message.success('Sign in successful!');
       navigate('/avatar');

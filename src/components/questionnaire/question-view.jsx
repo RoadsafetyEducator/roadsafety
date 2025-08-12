@@ -156,31 +156,32 @@ const Quiz = () => {
   const [showFireworks, setShowFireworks] = useState(false);
 
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const zone = queryParams.get('zone');
-    
-    if (zone) {
-
+useEffect(() => {
+  const queryParams = new URLSearchParams(location.search);
+  const zone = queryParams.get('zone');
+  
+  if (zone) {
     // Fetch questions from API
-      fetch(`http://localhost:8081/api/zone/${zone}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Failed to fetch questions');
-          }
-          console.log("URL: http://3.81.210.221:8081")
-          return response.json();
-        })
-        .then(data => {
-          setQuestions(data);
-          setLoading(false);
-        })
-        .catch(err => {
-          setError(err.message);
-          setLoading(false);
-        });
-    }
-  }, []);
+    fetch(`http://localhost:8081/api/zone/${zone}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch questions');
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Shuffle and pick 10 random questions
+        const shuffled = [...data].sort(() => 0.5 - Math.random());
+        const selected = shuffled.slice(0, 10);
+        setQuestions(selected);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }
+}, []);
 
   const handleAnswerSelect = (answer) => {
     const newAnswers = [...answers];
