@@ -79,7 +79,7 @@ const SignIn = () => {
     localStorage.setItem('studentName', formData.studentName);
     localStorage.setItem('school', formData.school);
 
-    await fetch('http://localhost:8081/api/login', {
+    await fetch(process.env.BASE_URL+"api/login", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
