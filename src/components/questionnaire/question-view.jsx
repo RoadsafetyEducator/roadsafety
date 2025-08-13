@@ -170,12 +170,18 @@ useEffect(() => {
         return response.json();
       })
       .then(data => {
-        // Shuffle and pick 10 random questions
-        const shuffled = [...data].sort(() => 0.5 - Math.random());
-        const selected = shuffled.slice(0, 10);
-        setQuestions(selected);
-        setLoading(false);
-      })
+          const questionsCopy = [...data];
+          const selected = [];
+
+          while (selected.length < 10 && questionsCopy.length > 0) {
+            const randomIndex = Math.floor(Math.random() * questionsCopy.length);
+            selected.push(questionsCopy.splice(randomIndex, 1)[0]); 
+            // splice removes the picked question from the array
+          }
+
+          setQuestions(selected);
+          setLoading(false);
+        })
       .catch(err => {
         setError(err.message);
         setLoading(false);
