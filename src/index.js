@@ -17,7 +17,7 @@ root.render(
   <Routes>
     <Route path="/" element={<SignIn />} />
     <Route path="/questionnaire" element={<QuestionView />} />
-    {/* <Route path="/" element={<Landing />} /> */}
+    <Route path="/intro" element={<Landing />} />
     <Route path="/zone" element={<ZoneSelection />} />
     <Route path="/avatar" element={<AvatarSelection />} />
   </Routes>

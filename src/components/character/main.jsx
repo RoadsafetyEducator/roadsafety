@@ -42,7 +42,7 @@ const Main = () => {
     if (isStorylineComplete) {
       // Logic for next step after the storyline is complete
       // console.log("Storyline complete, move to the next step.");
-      navigate('/questionnaire');
+      navigate('/landing');
     } else {
       setStartAnimation(true); // Ensure animation starts if it hasn't yet
     }

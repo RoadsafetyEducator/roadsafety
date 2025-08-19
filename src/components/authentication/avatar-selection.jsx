@@ -56,7 +56,7 @@ const SelectionPage = () => {
         key: 'continue',
         duration: 2,
       });
-      navigate('/zone');
+      navigate('/intro');
     }, 2000);
   };
 

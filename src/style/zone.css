@@ -193,3 +193,28 @@
   background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%) !important;
   border: none;
 }
+
+/* Normal card */
+.zone-card {
+  transition: all 0.3s ease;
+}
+
+/* Locked card style */
+.locked-card {
+  filter: grayscale(100%) brightness(0.8);
+  pointer-events: none; /* prevent hover/clicks */
+  opacity: 0.6;
+}
+
+/* Locked button style */
+.locked-button {
+  background-color: #d9d9d9 !important;
+  border: none !important;
+  color: #888 !important;
+  cursor: not-allowed !important;
+}
+
+/* Locked text */
+.locked-card .ant-card-meta-title {
+  color: #999 !important;
+}

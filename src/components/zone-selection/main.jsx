@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Button, Row, Col } from 'antd';
-import { DoubleRightOutlined } from '@ant-design/icons'; // Import the icon
+import { DoubleRightOutlined, LockOutlined } from '@ant-design/icons'; 
 import { useNavigate } from 'react-router-dom';
 import '../../style/zone.css';
 import Zone1 from '../../assets/Zone1.png';
@@ -13,19 +13,34 @@ const { Meta } = Card;
 
 const Main = () => {
   const navigate = useNavigate();
+  const [currentZone, setCurrentZone] = useState("zone01");
+
+  // Read currentZone from localStorage when component loads
+  useEffect(() => {
+    const savedZone = localStorage.getItem("currentZone");
+    if (savedZone) {
+      setCurrentZone(savedZone);
+    }
+  }, []);
 
   const handleZoneClick = (zoneName) => {
-    // Navigate to questionnaire with the zone name
     navigate(`/questionnaire?zone=${zoneName}`);
   };
 
-  // Zone data for cleaner rendering
+  // Define zones order
+  const zonesOrder = ["zone01", "zone02", "zone03", "zone04"];
+  const currentIndex = zonesOrder.indexOf(currentZone);
+
+  // Zone data with dynamic locked flag
   const zones = [
     { id: "zone01", title: "Zone 01", image: Zone1 },
     { id: "zone02", title: "Zone 02", image: Zone2 },
     { id: "zone03", title: "Zone 03", image: Zone3 },
-    { id: "zone04", title: "Zone 04", image: Zone4 }
-  ];
+    { id: "zone04", title: "Zone 04", image: Zone4 },
+  ].map((zone, index) => ({
+    ...zone,
+    locked: index > currentIndex, // unlock up to currentZone
+  }));
 
   return (
     <div className='zone-container'>
@@ -34,27 +49,33 @@ const Main = () => {
           {zones.map((zone) => (
             <Col xs={24} sm={12} md={12} lg={6} xl={6} key={zone.id}>
               <Card
-                hoverable
+                hoverable={!zone.locked}
                 cover={<img alt={zone.title} src={zone.image} />}
-                className="zone-card"
+                className={`zone-card ${zone.locked ? "locked-card" : ""}`}
                 actions={[
-                  <Button 
-                    type="primary" 
-                    onClick={() => handleZoneClick(zone.id)}
-                    className="zone-button"
-                  >
-                    Select Zone
-                                  <motion.span 
-                initial={{ x: 0 }}
-                animate={{ x: [0, 5, 0] }} 
-                transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
-              >
-                <DoubleRightOutlined />
-              </motion.span>
-                  </Button>
+                  zone.locked ? (
+                    <Button disabled className="zone-button locked-button">
+                      Locked <LockOutlined />
+                    </Button>
+                  ) : (
+                    <Button
+                      type="primary"
+                      onClick={() => handleZoneClick(zone.id)}
+                      className="zone-button"
+                    >
+                      Select Zone
+                      <motion.span
+                        initial={{ x: 0 }}
+                        animate={{ x: [0, 5, 0] }}
+                        transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+                      >
+                        <DoubleRightOutlined />
+                      </motion.span>
+                    </Button>
+                  )
                 ]}
               >
-                <Meta title={zone.title} description="" />
+                <Meta title={zone.title} description={zone.locked ? "Locked Zone" : ""} />
               </Card>
             </Col>
           ))}

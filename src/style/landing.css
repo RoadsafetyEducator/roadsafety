@@ -57,6 +57,22 @@ body{
     width: 100%;  /* Prevents it from collapsing */
 }
 
+.storyline p{
+    /* margin-bottom: 0rem !important; */
+}
+
+.storyline ul {
+  display: inline-block; /* Keeps list centered overall */
+  text-align: left;      /* Aligns bullet + text properly */
+  /* margin: 1em 0; */
+  padding-left: 1.2em;   /* Controls spacing between bullet & text */
+}
+
+.storyline li {
+  margin: 0.3em 0;       /* Small vertical spacing between items */
+}
+
+
 /* Cursor animation */
 .cursor {
     font-size: 18px;

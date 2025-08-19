@@ -189,6 +189,44 @@ useEffect(() => {
   }
 }, []);
 
+useEffect(() => {
+  const queryParams = new URLSearchParams(location.search);
+  const zone = queryParams.get('zone');
+  
+  if (zone) {
+    // Save current zone in localStorage
+    localStorage.setItem("currentZone", zone);
+
+    fetch(process.env.REACT_APP_API_URL+`/api/zone/${zone}`)
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to fetch questions');
+        return response.json();
+      })
+      .then(data => {
+        const questionsCopy = [...data];
+        const selected = [];
+
+        while (selected.length < 10 && questionsCopy.length > 0) {
+          const randomIndex = Math.floor(Math.random() * questionsCopy.length);
+          selected.push(questionsCopy.splice(randomIndex, 1)[0]); 
+        }
+
+        setQuestions(selected);
+        setLoading(false);
+        setCurrentQuestion(0);   // reset to first question
+        setAnswers([]);          // reset answers
+        setAnswerSelected(false);
+        setQuizCompleted(false);
+        setShowFireworks(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }
+}, [location.search]);
+
+
   const handleAnswerSelect = (answer) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestion] = answer;
@@ -206,9 +244,27 @@ useEffect(() => {
     }
   };
 
+  // const submitQuiz = () => {
+  //   navigate('/zone');
+  // };
+
   const submitQuiz = () => {
+  const queryParams = new URLSearchParams(location.search);
+  const currentZone = queryParams.get('zone');
+
+  // Define the order of zones
+  const zones = ["zone01", "zone02", "zone03", "zone04"];
+  const currentIndex = zones.indexOf(currentZone);
+
+  if (currentIndex !== -1 && currentIndex < zones.length - 1) {
+    // Go to the next zone
+    const nextZone = zones[currentIndex + 1];
+    navigate(`/questionnaire?zone=${nextZone}`);
+  } else {
+    // If it's the last zone, go back to /zone or final page
     navigate('/zone');
-  };
+  }
+};
 
   // Check if the selected answer matches the correct answer
   const isCorrectAnswer = (questionIndex, selectedAnswer) => {
@@ -321,7 +377,32 @@ useEffect(() => {
                 )}
               </div>
             </div>
-            <button className="ques-next-btn" onClick={submitQuiz}>Submit</button>
+            {/* <button className="ques-next-btn" onClick={submitQuiz}>Submit</button> */}
+           <button className="ques-next-btn" onClick={submitQuiz}>
+              {(() => {
+                const queryParams = new URLSearchParams(location.search);
+                const currentZone = queryParams.get('zone');
+                const zones = ["zone01", "zone02", "zone03", "zone04"];
+                const currentIndex = zones.indexOf(currentZone);
+
+                return currentIndex < zones.length - 1 ? (
+                  <>
+                    Next Challenge &nbsp;
+                    <motion.span 
+                      animate={{ x: [0, 8, 0] }} 
+                      transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
+                      style={{ display: "inline-block" }}
+                    >
+                      <DoubleRightOutlined />
+                    </motion.span>
+                  </>
+                ) : (
+                  "Submit"
+                );
+              })()}
+            </button>
+
+
           </div>
         )}
       </div>
