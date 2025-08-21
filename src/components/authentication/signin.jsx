@@ -79,25 +79,33 @@ const SignIn = () => {
     localStorage.setItem('studentName', formData.studentName);
     localStorage.setItem('school', formData.school);
 
-    console.log("process.env.BASE_URL: ",process.env.BASE_URL)
+    console.log("process.env.BASE_URL: ", process.env.BASE_URL);
 
-    await fetch(process.env.REACT_APP_API_URL+"/api/login", {
+    const response = await fetch(process.env.REACT_APP_API_URL + "/api/login", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     });
 
-
-    setTimeout(() => {
+    if (response.ok) {
+      // ✅ API success
       message.success('Sign in successful!');
-      navigate('/avatar');
-      setLoading(false); // optionally reset loading after navigation
-    }, 3000);
+      setTimeout(() => {
+        navigate('/avatar');
+        setLoading(false);
+      }, 1000); // smaller delay, optional
+    } else {
+      // ❌ API failed
+      const errorData = await response.json().catch(() => ({}));
+      message.error(errorData.message || 'Sign in failed. Please try again.');
+      setLoading(false);
+    }
 
   } catch (error) {
     message.error('Sign in failed. Please try again.');
     setLoading(false);
   }
+
 };
 
 
