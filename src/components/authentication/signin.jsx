@@ -79,8 +79,6 @@ const SignIn = () => {
     localStorage.setItem('studentName', formData.studentName);
     localStorage.setItem('school', formData.school);
 
-    console.log("process.env.BASE_URL: ", process.env.BASE_URL);
-
     const response = await fetch(process.env.REACT_APP_API_URL + "/api/login", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
