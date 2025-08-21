@@ -176,7 +176,7 @@ Each victory makes SafeTown safer. Are you ready to be our hero?
       const timeout = setTimeout(() => {
         setDisplayedText(storyline.slice(0, index + 1));
         setIndex(index + 1);
-      }, 100);
+      }, 30);
       return () => clearTimeout(timeout);
     } else if (index === storyline.length) {
       setShowCursor(false);
