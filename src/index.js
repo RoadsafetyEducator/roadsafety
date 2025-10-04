@@ -16,8 +16,8 @@ root.render(
 <React.StrictMode>
 <Router>
   <Routes>
-    <Route path="/" element={<AppName />} />
-    <Route path="/signin" element={<SignIn />} />
+    <Route path="/signin" element={<AppName />} />
+    <Route path="/" element={<SignIn />} />
     <Route path="/questionnaire" element={<QuestionView />} />
     <Route path="/intro" element={<Landing />} />
     <Route path="/zone" element={<ZoneSelection />} />

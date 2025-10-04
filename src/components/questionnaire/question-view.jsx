@@ -162,7 +162,7 @@ useEffect(() => {
   
   if (zone) {
     // Fetch questions from API
-    fetch(process.env.REACT_APP_API_URL+`/api/zone/${zone}`)
+    fetch(`http://54.169.230.102:8081/api/zone/${zone}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Failed to fetch questions');

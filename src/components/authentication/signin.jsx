@@ -74,36 +74,62 @@ const SignIn = () => {
 
   setLoading(true);  // set loading only if validation passed
 
+  // try {
+  //   console.log('Form values:', formData);
+  //   localStorage.setItem('studentName', formData.studentName);
+  //   localStorage.setItem('school', formData.school);
+
+  //   const response = await fetch("http://54.169.230.102:8081/api/login", {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body: JSON.stringify(formData)
+  //   });
+
+  //   if (response.ok) {
+  //     // ✅ API success
+  //     message.success('Sign in successful!');
+  //     setTimeout(() => {
+  //       navigate('/avatar');
+  //       setLoading(false);
+  //     }, 1000); // smaller delay, optional
+  //   } else {
+  //     console.log("Haiyoo : ",response)
+  //     // ❌ API failed
+  //     const errorData = await response.json().catch(() => ({}));
+  //     message.error(errorData.message || 'Sign in failed. Please try again.');
+  //     setLoading(false);
+  //   }
+
+  // } catch (error) {
+  //   message.error('Sign in failed. Please try again.');
+  //   setLoading(false);
+  // }
+
   try {
     console.log('Form values:', formData);
     localStorage.setItem('studentName', formData.studentName);
     localStorage.setItem('school', formData.school);
 
-    const response = await fetch(process.env.REACT_APP_API_URL + "/api/login", {
+    console.log("process.env.BASE_URL: ",process.env.BASE_URL)
+
+    await fetch("http://54.169.230.102:8081/api/login", {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData)
     });
 
-    if (response.ok) {
-      // ✅ API success
+
+    setTimeout(() => {
       message.success('Sign in successful!');
-      setTimeout(() => {
-        navigate('/avatar');
-        setLoading(false);
-      }, 1000); // smaller delay, optional
-    } else {
-      // ❌ API failed
-      const errorData = await response.json().catch(() => ({}));
-      message.error(errorData.message || 'Sign in failed. Please try again.');
-      setLoading(false);
-    }
+      navigate('/avatar');
+      setLoading(false); // optionally reset loading after navigation
+    }, 3000);
 
   } catch (error) {
+    console.log("errorrr: ",error)
     message.error('Sign in failed. Please try again.');
     setLoading(false);
   }
-
 };
 
 
