@@ -6,7 +6,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
+  background-image: radial-gradient( circle 476px at 54.8% 51.5%,  rgba(168,229,253,1) 0%, rgba(244,244,254,1) 42.3%, rgba(244,244,254,1) 100.2% );
   padding: 40px 20px;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
@@ -29,11 +29,13 @@
 }
 
 .selection-header h1 {
-  color: white;
   font-size: 48px;
   font-weight: 700;
   margin: 0 0 16px 0;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(180deg, #800080 0%, #ffc0cb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none; /* optional – remove shadow if you want pure gradient */
 }
 
 .selection-header p {

@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import QuestionView from '../src/components/questionnaire/question-view'
 import Landing from '../src/components/landing/main'
 import ZoneSelection from '../src/components/zone-selection/main'
-import SignIn from '../src/components/authentication/signin'
+import SignUp from './components/authentication/signup'
 import AvatarSelection from '../src/components/authentication/avatar-selection'
 import AppName from '../src/components/landing/app-name'
 
@@ -17,7 +17,7 @@ root.render(
 <Router>
   <Routes>
     <Route path="/signin" element={<AppName />} />
-    <Route path="/" element={<SignIn />} />
+    <Route path="/" element={<SignUp />} />
     <Route path="/questionnaire" element={<QuestionView />} />
     <Route path="/intro" element={<Landing />} />
     <Route path="/zone" element={<ZoneSelection />} />

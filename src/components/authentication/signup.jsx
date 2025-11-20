@@ -6,7 +6,9 @@ import '../../style/signin.css';
 
 const SignIn = () => {
   const [formData, setFormData] = useState({
-    studentName: '',
+    firstName: '',
+    lastName: '',
+    uid: '',
     school: '',
     grade: ''
   });
@@ -46,9 +48,11 @@ const SignIn = () => {
   const validateForm = () => {
     const newErrors = {};
     
-    if (!formData.studentName.trim()) {
-      newErrors.studentName = 'Please enter student name';
-    } else if (formData.studentName.trim().length < 2) {
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = 'Please enter First name';
+    }else if (!formData.lastName.trim()) {
+      newErrors.lastName = 'Please enter Last name';
+    } else if ((formData.firstName.trim().length || formData.lastName.trim().length) < 2) {
       newErrors.studentName = 'Name must be at least 2 characters';
     }
     
@@ -65,73 +69,50 @@ const SignIn = () => {
   };
 
   const handleSubmit = async (e) => {
-  // e.preventDefault(); // keep commented since you use button type="button"
+    if (!validateForm()) {
+      return;
+    }
 
-  if (!validateForm()) {
-    setLoading(false);  // reset loading if validation fails
-    return;
-  }
+    setLoading(true);
 
-  setLoading(true);  // set loading only if validation passed
+    try {
+      // Generate UID before sending to API
+    const generatedUid = (formData.firstName + formData.lastName + formData.school).toLowerCase().replace(/\s+/g, '');
+      
+      // Create the complete data object with UID
+      const submitData = {
+        ...formData,
+        uid: generatedUid
+      };
 
-  // try {
-  //   console.log('Form values:', formData);
-  //   localStorage.setItem('studentName', formData.studentName);
-  //   localStorage.setItem('school', formData.school);
+      // Store in localStorage
+      localStorage.setItem('firstName', formData.firstName);
+      localStorage.setItem('lastName', formData.lastName);
+      localStorage.setItem('uid', generatedUid);
+      localStorage.setItem('school', formData.school);
+      localStorage.setItem('grade', formData.grade);
 
-  //   const response = await fetch("http://54.169.230.102:8081/api/login", {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify(formData)
-  //   });
+      console.log('Form values:', submitData);
 
-  //   if (response.ok) {
-  //     // ✅ API success
-  //     message.success('Sign in successful!');
-  //     setTimeout(() => {
-  //       navigate('/avatar');
-  //       setLoading(false);
-  //     }, 1000); // smaller delay, optional
-  //   } else {
-  //     console.log("Haiyoo : ",response)
-  //     // ❌ API failed
-  //     const errorData = await response.json().catch(() => ({}));
-  //     message.error(errorData.message || 'Sign in failed. Please try again.');
-  //     setLoading(false);
-  //   }
+      // Send to API with UID included
+      await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(submitData)
+      });
 
-  // } catch (error) {
-  //   message.error('Sign in failed. Please try again.');
-  //   setLoading(false);
-  // }
+      setTimeout(() => {
+        message.success('Sign in successful!');
+        navigate('/avatar');
+        setLoading(false);
+      }, 3000);
 
-  try {
-    console.log('Form values:', formData);
-    localStorage.setItem('studentName', formData.studentName);
-    localStorage.setItem('school', formData.school);
-
-    console.log("process.env.BASE_URL: ",process.env.BASE_URL)
-
-    await fetch("http://54.169.230.102:8081/api/login", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    });
-
-
-    setTimeout(() => {
-      message.success('Sign in successful!');
-      navigate('/avatar');
-      setLoading(false); // optionally reset loading after navigation
-    }, 3000);
-
-  } catch (error) {
-    console.log("errorrr: ",error)
-    message.error('Sign in failed. Please try again.');
-    setLoading(false);
-  }
-};
-
+    } catch (error) {
+      console.log("errorrr: ", error);
+      message.error('Sign in failed. Please try again.');
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="main-frame">
@@ -142,16 +123,29 @@ const SignIn = () => {
         
         <div className="signin-form">
           <div className="form-group">
-            <label htmlFor="studentName">Student Name</label>
+            <label htmlFor="firstName">First Name</label>
             <input
-              id="studentName"
+              id="firstName"
               type="text"
-              value={formData.studentName}
-              onChange={(e) => handleInputChange('studentName', e.target.value)}
-              placeholder="Enter student name"
-              className={errors.studentName ? 'error' : ''}
+              value={formData.firstName}
+              onChange={(e) => handleInputChange('firstName', e.target.value)}
+              placeholder="Enter First name"
+              className={errors.firstName ? 'error' : ''}
             />
-            {errors.studentName && <span className="error-message">{errors.studentName}</span>}
+            {errors.firstName && <span className="error-message">{errors.firstName}</span>}
+          </div>
+
+           <div className="form-group">
+            <label htmlFor="lastName">Last Name</label>
+            <input
+              id="lastName"
+              type="text"
+              value={formData.lastName}
+              onChange={(e) => handleInputChange('lastName', e.target.value)}
+              placeholder="Enter Last name"
+              className={errors.lastName ? 'error' : ''}
+            />
+            {errors.lastName && <span className="error-message">{errors.lastName}</span>}
           </div>
 
           <div className="form-group">
@@ -189,7 +183,6 @@ const SignIn = () => {
             </select>
             {errors.grade && <span className="error-message">{errors.grade}</span>}
           </div>
-          {console.log("true: ",loading)}
 
            <Button
             icon={
@@ -205,7 +198,6 @@ const SignIn = () => {
               Sign In
             </Button>
 
-
         </div>
       </div>
     </div>
@@ -213,4 +205,3 @@ const SignIn = () => {
 };
 
 export default SignIn;
-

@@ -13,23 +13,33 @@ const { Meta } = Card;
 
 const Main = () => {
   const navigate = useNavigate();
-  const [currentZone, setCurrentZone] = useState("zone01");
 
-  // Read currentZone from localStorage when component loads
+  // UPDATED: Now using unlockedZone instead of currentZone
+  const [unlockedZone, setUnlockedZone] = useState("zone01");
+
+  // Load unlocked zone from localStorage
   useEffect(() => {
-    const savedZone = localStorage.getItem("currentZone");
-    if (savedZone) {
-      setCurrentZone(savedZone);
+    const savedUnlocked = localStorage.getItem("unlockedZone");
+
+    if (savedUnlocked) {
+      setUnlockedZone(savedUnlocked);
+    } else {
+      // Default user starts at zone01
+      setUnlockedZone("zone01");
+      localStorage.setItem("unlockedZone", "zone01");
     }
   }, []);
 
   const handleZoneClick = (zoneName) => {
+    localStorage.setItem('zone', zoneName);
     navigate(`/questionnaire?zone=${zoneName}`);
   };
 
   // Define zones order
   const zonesOrder = ["zone01", "zone02", "zone03", "zone04"];
-  const currentIndex = zonesOrder.indexOf(currentZone);
+
+  // NEW: find the unlocked zone index
+  const unlockedIndex = zonesOrder.indexOf(unlockedZone);
 
   // Zone data with dynamic locked flag
   const zones = [
@@ -39,7 +49,7 @@ const Main = () => {
     { id: "zone04", title: "Zone 04", image: Zone4 },
   ].map((zone, index) => ({
     ...zone,
-    locked: index > currentIndex, // unlock up to currentZone
+    locked: index > unlockedIndex, // UPDATED: unlock all up to current unlocked zone
   }));
 
   return (
