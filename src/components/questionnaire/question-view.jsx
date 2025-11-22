@@ -2,6 +2,7 @@
 // import { useNavigate, useLocation } from 'react-router-dom';
 // import { motion } from 'framer-motion';
 // import { DoubleRightOutlined } from '@ant-design/icons';
+// import { message } from 'antd';
 // import '../../style/firework.css';
 // import '../../style/questionView.css';
 // import Sad from '../../assets/Anxiety.gif'
@@ -29,7 +30,7 @@
   
 //   if (zone) {
 //     // Fetch questions from API
-//     fetch(`http://localhost:8081/api/zone/${zone}`)
+//     fetch(`${process.env.REACT_APP_API_URL}/api/zone/${zone}`)
 //       .then(response => {
 //         if (!response.ok) {
 //           throw new Error('Failed to fetch questions');
@@ -104,6 +105,14 @@
 //     setTimeLeft((prevTime) => {
 //       if (prevTime <= 1) {
 //         clearInterval(timer);
+        
+//         // If no answer selected when time runs out, mark as unanswered (will be counted as 0)
+//         if (!answerSelected) {
+//           const newAnswers = [...answers];
+//           newAnswers[currentQuestion] = null; // Mark as null for timeout
+//           setAnswers(newAnswers);
+//         }
+        
 //         // Auto-advance to next question when time runs out
 //         if (currentQuestion < questions.length - 1) {
 //           setCurrentQuestion(currentQuestion + 1);
@@ -119,7 +128,7 @@
 //   }, 1000);
 
 //   return () => clearInterval(timer);
-// }, [currentQuestion, quizCompleted, loading, questions.length]);
+// }, [currentQuestion, quizCompleted, loading, questions.length, answerSelected, answers]);
 
 
 //   const handleAnswerSelect = (answer) => {
@@ -139,31 +148,59 @@
 //     }
 //   };
 
-//   // const submitQuiz = () => {
-//   //   navigate('/zone');
-//   // };
-
-//   const submitQuiz = () => {
+//   const submitQuiz = async () => {
 //   const queryParams = new URLSearchParams(location.search);
 //   const currentZone = queryParams.get('zone');
 
-//   // Define the order of zones
-//   const zones = ["zone01", "zone02", "zone03", "zone04"];
-//   const currentIndex = zones.indexOf(currentZone);
+//   const firstName = localStorage.getItem('firstName');
+//   const lastName = localStorage.getItem('lastName');
+//   const uid = localStorage.getItem('uid');
 
-//   if (currentIndex !== -1 && currentIndex < zones.length - 1) {
-//     // Go to the next zone
-//     const nextZone = zones[currentIndex + 1];
-//     navigate(`/questionnaire?zone=${nextZone}`);
-//   } else {
-//     // If it's the last zone, go back to /zone or final page
+//   const score = correctAnswers;
+
+//   const resultData = {
+//     firstName,
+//     lastName,
+//     uid,
+//     score,
+//     zone: currentZone
+//   };
+
+//   try {
+//     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/result`, {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(resultData)
+//     });
+
+//     if (!response.ok) throw new Error('Failed to submit result');
+
+//     message.success('Result submitted successfully!');
+
+//     // Zones in order
+//     const zones = ["zone01", "zone02", "zone03", "zone04"];
+//     const currentIndex = zones.indexOf(currentZone);
+
+//     // Unlock next zone
+//     if (currentIndex !== -1 && currentIndex < zones.length - 1) {
+//       const nextZone = zones[currentIndex + 1];
+//       localStorage.setItem("unlockedZone", nextZone);
+//     }
+
+//     // Navigate to zone page to display unlocked status
 //     navigate('/zone');
+
+//   } catch (error) {
+//     console.error('Error submitting result:', error);
+//     message.error('Failed to submit result. Please try again.');
 //   }
 // };
+
 
 //   // Check if the selected answer matches the correct answer
 //   const isCorrectAnswer = (questionIndex, selectedAnswer) => {
 //     if (!questions[questionIndex]) return false;
+//     if (selectedAnswer === null) return false; // Timeout questions are incorrect
 //     const correctOption = questions[questionIndex].correct_answer; // "A", "B", "C", etc.
 //     return selectedAnswer === questions[questionIndex].answers[correctOption];
 //   };
@@ -315,7 +352,6 @@
 //                 )}
 //               </div>
 //             </div>
-//             {/* <button className="ques-next-btn" onClick={submitQuiz}>Submit</button> */}
 //            <button className="ques-next-btn" onClick={submitQuiz}>
 //               {(() => {
 //                 const queryParams = new URLSearchParams(location.search);
@@ -349,7 +385,6 @@
 // };
 
 // export default Quiz;
-
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -460,11 +495,13 @@ useEffect(() => {
         clearInterval(timer);
         
         // If no answer selected when time runs out, mark as unanswered (will be counted as 0)
-        if (!answerSelected) {
-          const newAnswers = [...answers];
-          newAnswers[currentQuestion] = null; // Mark as null for timeout
-          setAnswers(newAnswers);
-        }
+        setAnswers(prevAnswers => {
+          const newAnswers = [...prevAnswers];
+          if (!newAnswers[currentQuestion]) {
+            newAnswers[currentQuestion] = null; // Mark as null for timeout
+          }
+          return newAnswers;
+        });
         
         // Auto-advance to next question when time runs out
         if (currentQuestion < questions.length - 1) {
@@ -481,7 +518,7 @@ useEffect(() => {
   }, 1000);
 
   return () => clearInterval(timer);
-}, [currentQuestion, quizCompleted, loading, questions.length, answerSelected, answers]);
+}, [currentQuestion, quizCompleted, loading, questions.length]);
 
 
   const handleAnswerSelect = (answer) => {
