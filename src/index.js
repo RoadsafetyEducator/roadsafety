@@ -9,6 +9,7 @@ import Landing from '../src/components/landing/main'
 import ZoneSelection from '../src/components/zone-selection/main'
 import SignUp from './components/authentication/signup'
 import AvatarSelection from '../src/components/authentication/avatar-selection'
+import Results from '../src/components/Results/main'
 import AppName from '../src/components/landing/app-name'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -22,6 +23,8 @@ root.render(
     <Route path="/intro" element={<Landing />} />
     <Route path="/zone" element={<ZoneSelection />} />
     <Route path="/avatar" element={<AvatarSelection />} />
+    <Route path="/results" element={<Results />} />
+
   </Routes>
 </Router>
 </React.StrictMode>

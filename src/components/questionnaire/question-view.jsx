@@ -538,7 +538,10 @@ useEffect(() => {
     }
   };
 
-  const submitQuiz = async () => {
+  // Updated submitQuiz function for Quiz.jsx
+// Replace your existing submitQuiz function with this:
+
+const submitQuiz = async () => {
   const queryParams = new URLSearchParams(location.search);
   const currentZone = queryParams.get('zone');
 
@@ -557,6 +560,7 @@ useEffect(() => {
   };
 
   try {
+    // Submit current zone result
     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/result`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -571,20 +575,79 @@ useEffect(() => {
     const zones = ["zone01", "zone02", "zone03", "zone04"];
     const currentIndex = zones.indexOf(currentZone);
 
-    // Unlock next zone
-    if (currentIndex !== -1 && currentIndex < zones.length - 1) {
-      const nextZone = zones[currentIndex + 1];
-      localStorage.setItem("unlockedZone", nextZone);
-    }
+    // Check if user completed zone 4 (last zone)
+    if (currentZone === "zone04") {
+      // Lock all zones after completion
+      localStorage.setItem("unlockedZone", "zone04");
+      
+      // Navigate to final results page
+      navigate('/results');
+    } else {
+      // Unlock next zone if not the last zone
+      if (currentIndex !== -1 && currentIndex < zones.length - 1) {
+        const nextZone = zones[currentIndex + 1];
+        localStorage.setItem("unlockedZone", nextZone);
+      }
 
-    // Navigate to zone page to display unlocked status
-    navigate('/zone');
+      // Navigate to zone page
+      navigate('/zone');
+    }
 
   } catch (error) {
     console.error('Error submitting result:', error);
     message.error('Failed to submit result. Please try again.');
   }
 };
+
+
+
+//   const submitQuiz = async () => {
+//   const queryParams = new URLSearchParams(location.search);
+//   const currentZone = queryParams.get('zone');
+
+//   const firstName = localStorage.getItem('firstName');
+//   const lastName = localStorage.getItem('lastName');
+//   const uid = localStorage.getItem('uid');
+
+//   const score = correctAnswers;
+
+//   const resultData = {
+//     firstName,
+//     lastName,
+//     uid,
+//     score,
+//     zone: currentZone
+//   };
+
+//   try {
+//     const response = await fetch(`${process.env.REACT_APP_API_URL}/api/result`, {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify(resultData)
+//     });
+
+//     if (!response.ok) throw new Error('Failed to submit result');
+
+//     message.success('Result submitted successfully!');
+
+//     // Zones in order
+//     const zones = ["zone01", "zone02", "zone03", "zone04"];
+//     const currentIndex = zones.indexOf(currentZone);
+
+//     // Unlock next zone
+//     if (currentIndex !== -1 && currentIndex < zones.length - 1) {
+//       const nextZone = zones[currentIndex + 1];
+//       localStorage.setItem("unlockedZone", nextZone);
+//     }
+
+//     // Navigate to zone page to display unlocked status
+//     navigate('/zone');
+
+//   } catch (error) {
+//     console.error('Error submitting result:', error);
+//     message.error('Failed to submit result. Please try again.');
+//   }
+// };
 
 
   // Check if the selected answer matches the correct answer
