@@ -391,11 +391,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { DoubleRightOutlined } from '@ant-design/icons';
 import { message } from 'antd';
-import '../../style/firework.css';
+// import '../../style/firework.css';
 import '../../style/questionView.css';
 import Sad from '../../assets/Anxiety.gif'
 import Happy from '../../assets/Happy.gif'
 import HighFive from '../../assets/High five.gif'
+import '../../style/results.css'
 
 const Quiz = () => {
   const navigate = useNavigate();
@@ -537,6 +538,28 @@ useEffect(() => {
       setShowFireworks(true);
     }
   };
+
+  const renderConfetti = () => {
+    const confetti = [];
+    const colors = ['#FFD700', '#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA500', '#FF1493'];
+    
+    for (let i = 0; i < 100; i++) {
+      confetti.push(
+        <div 
+          key={i} 
+          className="confetti-piece" 
+          style={{
+            left: `${Math.random() * 100}%`,
+            backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+            animationDelay: `${Math.random() * 3}s`,
+            animationDuration: `${3 + Math.random() * 2}s`
+          }}
+        ></div>
+      );
+    }
+    return confetti;
+  };
+
 
   // Updated submitQuiz function for Quiz.jsx
 // Replace your existing submitQuiz function with this:
@@ -701,7 +724,7 @@ const submitQuiz = async () => {
 
   return (
     <div className='main-frame'>
-      {showFireworks && <div className="fireworks-container">{renderFireworks()}</div>}
+      {showFireworks && <div className="confetti-container">{renderConfetti()}</div>}
       <div className='sub-frame'>
         {!quizCompleted ? (
           <>
