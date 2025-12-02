@@ -10,35 +10,72 @@ const FinalResults = () => {
   const [loading, setLoading] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
 
-  useEffect(() => {
-    const fetchTotalScore = async () => {
-      localStorage.removeItem("unlockedZone");
-      const firstName = localStorage.getItem('firstName');
-      const lastName = localStorage.getItem('lastName');
+//   useEffect(() => {
+//     const fetchTotalScore = async () => {
+//       localStorage.removeItem("unlockedZone");
+//       const firstName = localStorage.getItem('firstName');
+//       const lastName = localStorage.getItem('lastName');
 
-      try {
+//       try {
+//         const response = await fetch(
+//           `${process.env.REACT_APP_API_URL}/api/result/total-score?firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}`,
+//           {
+//             method: 'GET',
+//             headers: { 'Content-Type': 'application/json' }
+//           }
+//         );
+
+//         if (response.ok) {
+//           const data = await response.json();
+//           console.log("data: ",data);
+//           setTotalScoreData(data);
+//           setShowConfetti(true);
+//         }
+//       } catch (error) {
+//         console.error('Error fetching total score:', error);
+//       } finally {
+//         setLoading(false);
+//       }
+//     };
+
+//     fetchTotalScore();
+//   }, []);
+
+    useEffect(() => {
+    const fetchTotalScore = async () => {
+        localStorage.removeItem("unlockedZone");
+        const firstName = localStorage.getItem('firstName');
+        const lastName = localStorage.getItem('lastName');
+
+        try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_URL}/api/result/total-score?firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}`,
-          {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' }
-          }
+            `${process.env.REACT_APP_API_URL}/api/total-score`,
+            {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                firstName: firstName,
+                lastName: lastName
+            })
+            }
         );
 
         if (response.ok) {
-          const data = await response.json();
-          setTotalScoreData(data);
-          setShowConfetti(true);
+            const data = await response.json();
+            console.log("data: ", data);
+            setTotalScoreData(data);
+            setShowConfetti(true);
         }
-      } catch (error) {
+        } catch (error) {
         console.error('Error fetching total score:', error);
-      } finally {
+        } finally {
         setLoading(false);
-      }
+        }
     };
 
     fetchTotalScore();
-  }, []);
+    }, []);
+
 
   const renderConfetti = () => {
     const confetti = [];
