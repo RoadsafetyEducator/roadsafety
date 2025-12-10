@@ -10,7 +10,9 @@ import ZoneSelection from '../src/components/zone-selection/main'
 import SignUp from './components/authentication/signup'
 import AvatarSelection from '../src/components/authentication/avatar-selection'
 import Results from '../src/components/Results/main'
+import Credits from './components/credits/main'
 import AppName from '../src/components/landing/app-name'
+import Driving from '../src/components/driving/main'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,6 +26,8 @@ root.render(
     <Route path="/zone" element={<ZoneSelection />} />
     <Route path="/avatar" element={<AvatarSelection />} />
     <Route path="/results" element={<Results />} />
+    <Route path="/credits" element={<Credits />} />
+    <Route path="/driving" element={<Driving />} />
 
   </Routes>
 </Router>

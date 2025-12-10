@@ -1,0 +1,258 @@
+.drive-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.drive-box {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0px 10px 30px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+.drive-title {
+  font-size: 22px;
+  margin-bottom: 30px;
+}
+
+.drive-options {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.drive-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  background: #fff;
+}
+
+.drive-circle:hover {
+  transform: scale(1.05);
+}
+
+.drive-icon {
+  width: 70px;
+  height: 70px;
+}
+
+.active-yes {
+  border: 3px solid #52c41a;
+}
+
+.active-no {
+  border: 3px solid #ff4d4f;
+}
+
+.drive-next-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px; /* space between text and icon if any */
+  height: 40px; /* optional */
+  padding: 20px 40px !important; 
+  background-image: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%) !important;
+  color: white;               /* make text solid white */
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  /* remove text gradient tricks */
+  background-clip: border-box; /* default */
+  -webkit-background-clip: border-box;
+  -webkit-text-fill-color: initial;
+}
+
+.drive-next-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50px;
+  padding: 3px;
+  /* background: linear-gradient(90deg, #56ab2f 0%, #a8e063 100%) !important; */
+  /* mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: xor;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  z-index: -1; */
+}
+
+.drive-next-btn:hover {
+  transform: translateY(-3px);
+  background-image: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%) !important;
+  color: white;
+}
+
+.drive-next-btn:active {
+  transform: translateY(-1px);
+}
+
+.drive-next-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  transition: left 0.5s;
+}
+
+.drive-next-btn:hover::after {
+  left: 100%;
+}
+
+@media (max-width: 480px) {
+  .continue-button {
+    padding: 14px 30px;
+    font-size: 16px;
+  }
+}
+
+.drive-question {
+  font-size: 14px;
+  margin: 15px 0 10px;
+  text-align: center;
+}
+
+.drive-followup {
+  margin-top: 15px;
+  text-align: left;
+}
+
+.drive-radio-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.drive-radio {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.drive-card {
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.drive-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.drive-header h2 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.drive-header p {
+  font-size: 14px;
+  color: #555;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.question-text {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.icon-options {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.icon-circle {
+  width: 120px;
+  height: 120px;
+  border: 3px solid #ccc;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: 0.3s;
+}
+
+.icon-circle img {
+  width: 50px;
+}
+
+.active-yes {
+  border-color: #52c41a;
+}
+
+.active-no {
+  border-color: #ff4d4f;
+}
+
+.tick {
+  position: absolute;
+  width: 20px;
+  height: 30x;
+  right: -10px;
+  bottom: -12px;
+  background: #52c41a;
+  border-radius: 50%;
+  padding: 5px;
+  box-shadow: 0 0 0 3px #fff;
+}
+
+.drive-section {
+  margin-top: 20px;
+}
+
+.btn-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.next-btn {
+  border-radius: 25px;
+  padding: 0 40px;
+  height: 45px;
+}
+
+/* Mobile Friendly */
+@media (max-width: 576px) {
+  .icon-circle {
+    width: 90px;
+    height: 90px;
+  }
+
+  .icon-circle img {
+    width: 40px;
+  }
+}

@@ -10,37 +10,6 @@ const FinalResults = () => {
   const [loading, setLoading] = useState(true);
   const [showConfetti, setShowConfetti] = useState(false);
 
-//   useEffect(() => {
-//     const fetchTotalScore = async () => {
-//       localStorage.removeItem("unlockedZone");
-//       const firstName = localStorage.getItem('firstName');
-//       const lastName = localStorage.getItem('lastName');
-
-//       try {
-//         const response = await fetch(
-//           `${process.env.REACT_APP_API_URL}/api/result/total-score?firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}`,
-//           {
-//             method: 'GET',
-//             headers: { 'Content-Type': 'application/json' }
-//           }
-//         );
-
-//         if (response.ok) {
-//           const data = await response.json();
-//           console.log("data: ",data);
-//           setTotalScoreData(data);
-//           setShowConfetti(true);
-//         }
-//       } catch (error) {
-//         console.error('Error fetching total score:', error);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchTotalScore();
-//   }, []);
-
     useEffect(() => {
     const fetchTotalScore = async () => {
         localStorage.removeItem("unlockedZone");
@@ -229,7 +198,7 @@ const FinalResults = () => {
         </motion.div>
 
         {/* Action Buttons */}
-        {/* <motion.div 
+        <motion.div 
           className="results-actions"
           initial={{ y: 50, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -237,18 +206,12 @@ const FinalResults = () => {
         >
           <button 
             className="btn-primary"
-            onClick={() => navigate('/zone')}
+            onClick={() => navigate('/credits')}
             style={{ backgroundColor: performance.color }}
           >
-            Back to Zones
+            View Credits
           </button>
-          <button 
-            className="btn-secondary"
-            onClick={() => navigate('/')}
-          >
-            Go Home
-          </button>
-        </motion.div> */}
+        </motion.div>
       </motion.div>
     </div>
   );
