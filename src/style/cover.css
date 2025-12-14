@@ -13,20 +13,22 @@ html, body {
   width: 100vw;
   height: 100vh;
   background-image: url('../assets/CoverPage.jpg');
-  background-size: 100% 100%;
+  background-size: 100% 100%;  /* Stretch on desktop */
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
   display: flex;
-  align-items: flex-end;  /* Changed from center to flex-end */
+  align-items: flex-end;
   justify-content: center;
 }
+
 .cover-page-overlay {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.05);
   z-index: 1;
 }
+
 .cover-page-content {
   position: relative;
   z-index: 2;
@@ -35,19 +37,60 @@ html, body {
   align-items: center;
   gap: 28px;
   text-align: center;
-  padding-bottom: 10px;  /* Add space from the bottom edge */
+  padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.start-mission-button{
+.start-mission-button {
   background: #228B22;
   border: none;
   border-radius: 15px;
   font-weight: 600;
+  font-size: 16px;
+  padding: 12px 32px;
+  height: auto;
 }
 
-.start-mission-button:hover{
-  background-color: #2E8B57;
+.start-mission-button:hover {
+  background-color: #2E8B57 !important;
 }
-.cover-page-footer{
+
+.cover-page-footer {
   font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Mobile - fit image properly */
+@media (max-width: 768px) {
+  .cover-page-container {
+    background-size: contain;  /* Fit entire image on mobile */
+    background-position: center;
+  }
+  
+  .cover-page-content {
+    padding-bottom: 40px;
+  }
+  
+  .start-mission-button {
+    font-size: 14px;
+    padding: 10px 24px;
+  }
+  
+  .cover-page-footer {
+    font-size: 11px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .cover-page-content {
+    padding-bottom: 30px;
+    gap: 20px;
+  }
+  
+  .cover-page-footer {
+    font-size: 10px;
+  }
 }
