@@ -17,10 +17,21 @@ const DrivingCheck = () => {
   const tickImg = 'https://cdn-icons-png.flaticon.com/512/845/845646.png';
 
   const handleNext = () => {
+    const drivingAnswers = {
+      hasDriven: q1,          // 'yes' | 'no'
+      drivenVehicleType: q2, // only if q1 === 'yes'
+      willingnessToDrive: q3 // only if q1 === 'no'
+    };
+
+    localStorage.setItem(
+      'drivingCheckAnswers',
+      JSON.stringify(drivingAnswers)
+    );
+
     navigate('/intro');
   };
 
-  return (
+return (
     <Row justify="center" align="middle" style={{ minHeight: '100vh', padding: 10 }}>
       <Col xs={24} sm={22} md={16} lg={12} xl={10}>
         <Card className="drive-card">

@@ -579,7 +579,8 @@ const submitQuiz = async () => {
     lastName,
     uid,
     score,
-    zone: currentZone
+    zone: currentZone,
+    drivingCheckAnswers: localStorage.getItem("drivingCheckAnswers")?localStorage.getItem("drivingCheckAnswers"):{}
   };
 
   try {

@@ -13,14 +13,16 @@ import Results from '../src/components/Results/main'
 import Credits from './components/credits/main'
 import AppName from '../src/components/landing/app-name'
 import Driving from '../src/components/driving/main'
+import Cover from '../src/components/cover/main'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 <React.StrictMode>
 <Router>
   <Routes>
-    <Route path="/signin" element={<AppName />} />
-    <Route path="/" element={<SignUp />} />
+    <Route path="/" element={<Cover />} />
+     <Route path="/auth" element={<SignUp />} />
+    <Route path="/auth" element={<SignUp />} />
     <Route path="/questionnaire" element={<QuestionView />} />
     <Route path="/intro" element={<Landing />} />
     <Route path="/zone" element={<ZoneSelection />} />
