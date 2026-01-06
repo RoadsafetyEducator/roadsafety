@@ -22,7 +22,6 @@ root.render(
   <Routes>
     <Route path="/" element={<Cover />} />
      <Route path="/auth" element={<SignUp />} />
-    <Route path="/auth" element={<SignUp />} />
     <Route path="/questionnaire" element={<QuestionView />} />
     <Route path="/intro" element={<Landing />} />
     <Route path="/zone" element={<ZoneSelection />} />
