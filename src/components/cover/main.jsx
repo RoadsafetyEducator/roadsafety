@@ -51,8 +51,8 @@ export default function RoadSafetyCover() {
         </div>
 
         <h1 className="title">
-          <span className="title-road">ROAD</span>
-          <span className="title-safety">SAFETY</span>
+          <span className="title-road">SafeTown</span>
+          <span className="title-safety">Hero</span>
         </h1>
 
         <p className="subtitle">Let's Learn to Stay Safe! 🚦</p>
