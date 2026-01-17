@@ -463,7 +463,7 @@ useEffect(() => {
         const questionsCopy = [...data];
         const selected = [];
 
-        while (selected.length < 10 && questionsCopy.length > 0) {
+        while (selected.length < 5 && questionsCopy.length > 0) {
           const randomIndex = Math.floor(Math.random() * questionsCopy.length);
           selected.push(questionsCopy.splice(randomIndex, 1)[0]); 
         }
