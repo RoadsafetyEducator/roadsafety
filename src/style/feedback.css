@@ -1,0 +1,117 @@
+.feedback-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.feedback-wrapper {
+  max-width: 600px;
+  width: 100%;
+}
+
+.feedback-img{
+  width: 30% !important;
+  height: 30% !important;
+}
+
+
+.feedback-card {
+  border-radius: 16px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border: none;
+  overflow: hidden;
+}
+
+.feedback-content {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.feedback-icon {
+  font-size: 80px;
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 24px;
+  display: inline-block;
+}
+
+.feedback-title {
+  font-size: 32px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 16px;
+}
+
+.feedback-description {
+  font-size: 16px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.feedback-button {
+  height: 50px;
+  padding: 0 40px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 25px;
+  background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%) !important;
+  border: none;
+  box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.feedback-button:hover {
+  background: linear-gradient(135deg, #9333ea 0%, #db2777 100%);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+  transform: translateY(-2px);
+}
+
+.feedback-button:active {
+  transform: translateY(0);
+}
+
+.feedback-note {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .feedback-title {
+    font-size: 24px;
+  }
+
+  .feedback-description {
+    font-size: 14px;
+  }
+
+  .feedback-icon {
+    font-size: 60px;
+  }
+
+  /* .feedback-img{
+    width: 10% !important;
+    height: 10% !important;
+  } */
+
+  .feedback-content {
+    padding: 30px 15px;
+  }
+}

@@ -230,3 +230,29 @@
 .locked-card .ant-card-meta-title {
   color: #999 !important;
 }
+
+
+/*888888888888888*/
+
+/* Final Zone Styling */
+.final-zone-card {
+  position: relative;
+  border: 2px solid #ffd700;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.final-zone-card .ant-card-cover img {
+  filter: brightness(0.7);
+}
+
+.final-zone-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  color: white !important;
+  font-weight: 600;
+}
+
+.final-zone-card .ant-card-meta-description {
+  color: #ffd700;
+  font-weight: 500;
+}

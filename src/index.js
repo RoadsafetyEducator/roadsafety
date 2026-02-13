@@ -14,6 +14,7 @@ import Credits from './components/credits/main'
 import AppName from '../src/components/landing/app-name'
 import Driving from '../src/components/driving/main'
 import Cover from '../src/components/cover/main'
+import Feedback from '../src/components/feedback/main'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -29,6 +30,7 @@ root.render(
     <Route path="/results" element={<Results />} />
     <Route path="/credits" element={<Credits />} />
     <Route path="/driving" element={<Driving />} />
+    <Route path="/feedback" element={<Feedback />} />
 
   </Routes>
 </Router>

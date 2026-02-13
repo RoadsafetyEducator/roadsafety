@@ -179,7 +179,7 @@ const FinalResults = () => {
                 <div className="zone-name">{zoneScore.zone.replace('zone', 'Zone ')}</div>
                 <div className="zone-score">
                   <span className="zone-score-value">{zoneScore.score}</span>
-                  <span className="zone-score-total">/10</span>
+                  <span className="zone-score-total">/5</span>
                 </div>
                 <div className="zone-progress-bar">
                   <motion.div 

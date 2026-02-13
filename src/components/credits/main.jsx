@@ -62,8 +62,8 @@ const Credits = () => {
         </div>
 
         <div className="credits-btn">
-          <Button type="primary" onClick={() => navigate('/')}>
-            Back to Home
+          <Button type="primary" onClick={() => navigate('/feedback')}>
+            Give feedback
           </Button>
         </div>
 
