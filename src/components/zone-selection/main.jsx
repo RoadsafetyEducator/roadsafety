@@ -243,15 +243,15 @@ const Main = () => {
               cover={<img alt="Final Zone" src={FinalZone} />}
               className="zone-card final-zone-card locked-card"
               actions={[
-                <Button disabled className="zone-button final-zone-button">
+                <Button disabled className="zone-button locked-button">
                   Coming Soon <TrophyOutlined />
                 </Button>
               ]}
             >
-              <Meta 
+              {/* <Meta 
                 title="Final Zone" 
                 description="Complete all zones to unlock" 
-              />
+              /> */}
             </Card>
           </Col>
         </Row>
